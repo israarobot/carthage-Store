@@ -50,13 +50,14 @@ class _HomeScreenState extends State<HomeScreen> {
             _buildCategoryList(),
             _shopBackground(),
             _buildClassList(),
-            Expanded(
-              child: _buildBuy(),
-            )
+            _buildBuy(),
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(bottom: 10), // Optional padding adjustment
+        child: _buildBottomNavigationBar(),
+      ),
     );
   }
 
@@ -173,10 +174,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _shopBackground() {
     return Container(
       margin: EdgeInsets.only(top: 15),
-      width: 380,
+      width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-            Radius.circular(30)), // Keeps the container radius large
+        borderRadius: BorderRadius.all(Radius.circular(30)),
         boxShadow: [
           BoxShadow(
             color: Colors.black26,
@@ -191,11 +191,11 @@ class _HomeScreenState extends State<HomeScreen> {
         alignment: Alignment.center,
         children: [
           ClipRRect(
-            // borderRadius: BorderRadius.circular(2), // Reduced border radius for the image
+            borderRadius: BorderRadius.circular(30),
             child: Image.asset(
               'assets/images/women_background.jpg',
               fit: BoxFit.cover,
-              width: 400,
+              width: double.infinity,
               height: 250,
             ),
           ),
@@ -216,16 +216,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text(
                   'Enjoy a Special',
                   style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
                 Text(
                   'Offer!',
                   style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
@@ -300,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 80, // Hauteur fixe pour la ListView
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: categories.length, // Utiliser la longueur de la liste
+              itemCount: categories.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -308,8 +310,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       CircleAvatar(
                         radius: 30,
-                        backgroundImage:
-                            AssetImage(categories[index]['image']!),
+                        backgroundImage: AssetImage(categories[index]['image']!),
                       ),
                       Text(categories[index]['name']!),
                     ],
@@ -327,22 +328,10 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Map<String, String>> products = [
       {'image': 'assets/images/Lamp.jpg', 'name': 'Lamp', 'price': '\$50'},
       {'image': 'assets/images/Bag.jpg', 'name': 'Bag', 'price': '\$80'},
-      {
-        'image': 'assets/images/Headphone.jpg',
-        'name': 'Headphone',
-        'price': '\$120'
-      },
-      {
-        'image': 'assets/images/Jewellery.jpg',
-        'name': 'Jewellery',
-        'price': '\$200'
-      },
+      {'image': 'assets/images/Headphone.jpg', 'name': 'Headphone', 'price': '\$120'},
+      {'image': 'assets/images/Jewellery.jpg', 'name': 'Jewellery', 'price': '\$200'},
       {'image': 'assets/images/shoes.jpg', 'name': 'Shoes', 'price': '\$95'},
-      {
-        'image': 'assets/images/clothing.jpg',
-        'name': 'Clothing',
-        'price': '\$70'
-      },
+      {'image': 'assets/images/clothing.jpg', 'name': 'Clothing', 'price': '\$70'},
     ];
 
     return Padding(
@@ -356,9 +345,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Text(
                 "Top Selling",
                 style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
                 "See All",
@@ -368,9 +358,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SizedBox(height: 10),
           GridView.builder(
-            shrinkWrap: true, // Ensures GridView fits inside a column
-            physics:
-                NeverScrollableScrollPhysics(), // Prevents internal scrolling
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 10,
@@ -395,12 +384,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ClipRRect(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(15)),
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
                       child: Image.asset(
                         products[index]['image']!,
                         width: double.infinity,
-                        height: 120, // Fixed height to prevent layout issues
+                        height: 100,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -410,14 +398,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             products[index]['name']!,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 5),
                           Text(
                             products[index]['price']!,
-                            style:
-                                TextStyle(fontSize: 14, color: Colors.orange),
+                            style: TextStyle(fontSize: 14, color: Colors.orange),
                           ),
                         ],
                       ),
@@ -431,8 +417,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Text("Buy Now",
-                          style: TextStyle(color: Colors.white)),
+                      child: Text("Buy Now", style: TextStyle(color: Colors.white)),
                     ),
                     SizedBox(height: 10),
                   ],
